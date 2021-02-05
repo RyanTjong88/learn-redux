@@ -5,20 +5,23 @@ import { render } from 'react-dom';
 import css from './styles/style.styl';
 
 // IMPORT COMPONENTS
-import Main from './components/Main';
+import App from './components/App';
 import Single from './components/Single';
 import PhotoGrid from './components/PhotoGrid';
 
 // IMPORT REACT ROUTER DEPS
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
-
+import { Provider } from 'react-redux';
+import store, { history } from './store'
 const router = (
-    <Router history={browserHistory}>
-        <Route path="/" component={Main}>
-            <IndexRoute component={PhotoGrid}></IndexRoute>
-            <Route path="/view/:postid" component={Single}></Route>
-        </Route>
-    </Router>
+    <Provider store={store}>
+        <Router history={history}>
+            <Route path="/" component={App}>
+                <IndexRoute component={PhotoGrid}></IndexRoute>
+                <Route path="/view/:postid" component={Single}></Route>
+            </Route>
+        </Router>
+    </Provider>
 )
 
 render(router, document.getElementById('root'));
